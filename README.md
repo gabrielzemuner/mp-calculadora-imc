@@ -1,46 +1,73 @@
-Nada melhor do que manter a saúde em dia, não é? Sendo o IMC uma medida internacional usada para calcular se uma pessoa está no peso ideal, a nossa calculadora de Índice de Massa Corporal (IMC) é perfeita para isso.
+# React + TypeScript + Vite
 
-## 🔨 Requisitos
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-- Desenvolva a aplicação utilizando Vite + React;
-- Sua calculadora deve possuir:
-  - Input para informar o peso em *kg*;
-  - Input para informar a altura em *cm*;
-  - Botão para realizar o cálculo;
-- Como resultado, mostre uma tabela com as principais informações: peso, altura, IMC e resultado (como exemplo, para o IMC de 22.04, o resultado é Peso Normal);
-- Os campos devem ser resetados e desabilitados após o cálculo, e o botão deve mudar de "Calcular" para "Refazer";
-- Ao clicar em "Refazer", a tabela deve desaparecer e os campos devem ser novamente habilitados.
+Currently, two official plugins are available:
 
-## 🔍 Dicas
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- Procure entender como lidar com números flutuantes;
-- É muito importante saber a convenção para separação de números decimais em JavaScript;
-- Dê uma olhada na API `Intl` do JavaScript, ela poderá te ajudar;
-- Utilize condicionais para os resultados caso julgue necessário!
+## React Compiler
 
-## 🎨 Design Sugerido
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-Temos uma sugestão de design no Figma. Entretanto, fique à vontade para montar a aplicação conforme a sua criatividade.
+## Expanding the ESLint configuration
 
-### Figma
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-🔗 [Link do design](https://www.figma.com/community/file/1314580663583006642/mini-projeto-calculadora-de-imc)
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-## 👉🏽 Sobre esse mini-projeto
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-### O que você irá praticar:
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-#### Vite
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-- Setup de um projeto React com Vite
-- Estrutura básica de um projeto React
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-#### React e JS
-
-- Estado e Eventos com React
-- Formulários controlados com React
-- Números flutuantes com JavaScript
-
-#### TailwindCSS
-
-- Prática com o Framework
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
