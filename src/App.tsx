@@ -55,8 +55,6 @@ function App() {
     // const imc = weightNumber / (heightNumber * heightNumber)
     const IMC = calculateIMC(weightNumber, heightNumber);
     const IMCResultString = IMCResult(IMC);
-    console.log(IMC);
-    console.log(IMCResultString);
 
     // set result
     setIMCData({
@@ -118,7 +116,7 @@ function App() {
         )}
       </section>
       <section id="reference-table">
-        <ReferenceTable />
+        <ReferenceTable activeResult={IMCData?.IMCResult} />
       </section>
     </main>
   );

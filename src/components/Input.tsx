@@ -8,7 +8,7 @@ function Input({
   return (
     <input
       className={cn(
-        "block w-full border border-rose-400 rounded p-3",
+        "block w-full border border-rose-400 rounded p-3 disabled:bg-zinc-100 disabled:border-zinc-200",
         className
       )}
       {...props}
