@@ -6,7 +6,7 @@ function Button({
 }: ButtonHTMLAttributes<HTMLButtonElement> & { children: React.ReactNode }) {
   return (
     <button
-      className="mt-6 bg-rose-400 text-white font-bold w-full p-3 rounded"
+      className="mt-6 bg-rose-400 text-white font-bold w-full p-3 rounded cursor-pointer"
       {...props}
     >
       {children}

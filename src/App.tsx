@@ -5,8 +5,11 @@ import Label from "./components/Label";
 import ReferenceTable from "./components/ReferenceTable";
 import { calculateIMC, IMCResult } from "./lib/IMC";
 import ResultsTable from "./components/ResultsTable";
+import Alert from "./components/Alert";
 
 function App() {
+  const [error, setError] = useState<string | null>(null);
+
   const [IMCData, setIMCData] = useState<null | {
     weight: number;
     height: number;
@@ -27,27 +30,27 @@ function App() {
     // handle empty fields
     const { weight, height } = data;
     if (!weight || !height) {
-      alert("Ops... Você precisa preencher todos os campos!");
+      setError("Você precisa preencher todos os campos!");
       return;
     }
 
     // parse and handle string to number
-    const weightNumber = parseFloat(weight.replace(",", ". "));
-    const heightNumber = parseFloat(height.replace(",", ". ")) / 100;
+    const weightNumber = parseFloat(weight.replace(",", "."));
+    const heightNumber = parseFloat(height.replace(",", ".")) / 100;
 
     if (isNaN(weightNumber) || isNaN(heightNumber)) {
-      alert("Ops... Você precisa preencher os campos com números válidos!");
+      setError("Você precisa preencher os campos com números válidos!");
       return;
     }
 
     // handle invalid numbers
     if (weightNumber <= 2 || weightNumber > 500) {
-      alert("Ops... O peso precisa ser maior que 2kg e menor que 500kg!");
+      setError("O peso precisa ser maior que 2kg e menor que 500kg!");
       return;
     }
 
     if (heightNumber <= 0.5 || heightNumber > 2.5) {
-      alert("Ops... A altura precisa ser maior que 50cm e menor que 2,5m");
+      setError("A altura precisa ser maior que 50cm e menor que 2,5m");
       return;
     }
 
@@ -75,6 +78,9 @@ function App() {
 
   return (
     <main className="bg-white max-w-4xl mx-auto md:py-24 md:px-48 px-5 py-10">
+      {/* Renderiza o componente de alerta quando tiver texto */}
+      {<Alert text={error} onClose={() => setError(null)} />}
+
       <section id="form">
         <form onSubmit={handleSubmit}>
           <div>
@@ -84,6 +90,7 @@ function App() {
               name="weight"
               className="mt-1"
               type="text"
+              inputMode="decimal"
               id="weight"
             />
           </div>
@@ -94,6 +101,7 @@ function App() {
               name="height"
               className="mt-1"
               type="text"
+              inputMode="decimal"
               id="height"
             />
           </div>

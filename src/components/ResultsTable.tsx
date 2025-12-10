@@ -1,10 +1,15 @@
 import { formatNumber } from "../lib/utils";
 
-function ResultsTable({
-  IMCData,
-}: {
-  IMCData: { weight: number; height: number; IMC: number; IMCResult: string };
-}) {
+type ResultsTableProps = {
+  IMCData: {
+    weight: number;
+    height: number;
+    IMC: number;
+    IMCResult: string;
+  };
+};
+
+function ResultsTable({ IMCData }: ResultsTableProps) {
   return (
     <table className="text-center text-xs md:text-base md:[&>tbody>tr>td]:p-2 md:[&>tbody>tr>td]:px-4 [&>tbody>tr>td]:px-2 text-neutral-600 mx-auto">
       <tbody>
