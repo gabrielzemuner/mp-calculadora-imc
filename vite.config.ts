@@ -9,4 +9,5 @@ export default defineConfig({
     host: "0.0.0.0", // 🔴 expõe na rede local
     port: 5173, // opcional, mas deixa fixo
   },
+  base: "/mp-calculadora-imc/", // github pages
 });
